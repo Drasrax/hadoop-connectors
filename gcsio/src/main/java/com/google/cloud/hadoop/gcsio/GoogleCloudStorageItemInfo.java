@@ -326,6 +326,11 @@ public class GoogleCloudStorageItemInfo {
     return size >= 0;
   }
 
+  /** Indicates whether this item exists. */
+  public boolean implicitDirectory() {
+    return isDirectory() && size == 0 && creationTime == 0 && modificationTime == 0;
+  }
+
   /**
    * Get the content generation of the object.
    */

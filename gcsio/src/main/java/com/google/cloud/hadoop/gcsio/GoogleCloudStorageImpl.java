@@ -1519,10 +1519,11 @@ public class GoogleCloudStorageImpl implements GoogleCloudStorage {
                 + listedObjects.size());
 
     // Create inferred directory for the prefix object if necessary
+    logger.atInfo().log("\n\n\nlistedObjects:\n%s\nobjectNamePrefix:\n%s", listedObjects, objectNamePrefix);
     if (storageOptions.isInferImplicitDirectoriesEnabled()
         && listOptions.isIncludePrefix()
         && listOptions.getDelimiter() != null
-        && (!listedPrefixes.isEmpty() || !listedObjects.isEmpty())
+        && (!listedPrefixes.isEmpty() || !listedObjects.isEmpty() || objectNamePrefix == null)
         && (listedObjects.isEmpty() || !listedObjects.get(0).getName().equals(objectNamePrefix))) {
       objectInfos.add(createInferredDirectory(new StorageResourceId(bucketName, objectNamePrefix)));
     }
